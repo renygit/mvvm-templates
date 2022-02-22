@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.renygit.mvvmtemplates.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.renygit.mvvmtemplates.MyBundle
 
 class MyApplicationService {
 
