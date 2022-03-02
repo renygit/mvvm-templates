@@ -19,11 +19,13 @@ fun RecipeExecutor.mvvmActivityRecipe(
 ) {
     val (projectData, srcOut, resOut) = moduleData
     val ktOrJavaExt = language.extension//projectData.language.extension
+    val pkg = activityClass.toLowerCase()
+
     generateManifest(
         moduleData = moduleData,
         activityClass = "${activityClass}Activity",
 //            activityTitle = activityClass,
-        packageName = "${packageName}.ui",
+        packageName = "${packageName}.${pkg}",
         isLauncher = false,
         hasNoActionBar = false,
         generateActivityTitle = true,
@@ -35,15 +37,15 @@ fun RecipeExecutor.mvvmActivityRecipe(
         //applicationPackage
         val mvvmActivity = mvvmActivityKt(projectData.applicationPackage, activityClass, layoutName, packageName)
         // 保存Activity
-        save(mvvmActivity, srcOut.resolve("ui/${activityClass}Activity.${ktOrJavaExt}"))
+        save(mvvmActivity, srcOut.resolve("${pkg}/${activityClass}Activity.${ktOrJavaExt}"))
         // 保存xml
         save(mvvmActivityXml(packageName, activityClass), resOut.resolve("layout/${layoutName}.xml"))
         // 保存DI model
-        save(mvvmDIModelKt(packageName, activityClass), srcOut.resolve("ui/${activityClass}DIModule.${ktOrJavaExt}"))
+        save(mvvmDIModelKt(packageName, activityClass), srcOut.resolve("${pkg}/${activityClass}DIModule.${ktOrJavaExt}"))
         // 保存viewmodel
-        save(mvvmViewModelKt(packageName, activityClass), srcOut.resolve("ui/${activityClass}ViewModel.${ktOrJavaExt}"))
+        save(mvvmViewModelKt(packageName, activityClass), srcOut.resolve("${pkg}/${activityClass}ViewModel.${ktOrJavaExt}"))
         // 保存repository
-        save(mvvmRepositoryKt(packageName, activityClass), srcOut.resolve("ui/${activityClass}Repository.${ktOrJavaExt}"))
+        save(mvvmRepositoryKt(packageName, activityClass), srcOut.resolve("${pkg}/${activityClass}Repository.${ktOrJavaExt}"))
         //保存model
 //    save(mvvmModel(packageName, activityClass), srcOut.resolve("model/${activityClass}Model.${ktOrJavaExt}"))
     }/*else if (language == Language.Java){

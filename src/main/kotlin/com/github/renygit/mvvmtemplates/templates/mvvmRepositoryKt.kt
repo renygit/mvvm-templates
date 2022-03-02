@@ -9,7 +9,7 @@ fun mvvmRepositoryKt(
     packageName:String,
     activityClass:String
 )="""
-package ${packageName}.ui
+package ${packageName}.${activityClass.toLowerCase()}
 
 class ${activityClass}Repository(val api: ApiInterface) {
 }

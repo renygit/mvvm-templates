@@ -11,7 +11,8 @@ import com.android.tools.idea.wizard.template.WizardTemplateProvider
 class MvvmTemplateProviderImpl: WizardTemplateProvider() {
 
     override fun getTemplates(): List<Template> = listOf(
-        mvvmActivityTemplate
+        mvvmActivityTemplate,
+        mvvmFragmentTemplate
     )
 
 }

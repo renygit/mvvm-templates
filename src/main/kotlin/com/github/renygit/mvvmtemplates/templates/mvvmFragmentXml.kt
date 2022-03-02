@@ -6,7 +6,7 @@ package com.github.renygit.mvvmtemplates.templates
  * 时间：2022/2/23 9:51
  */
 
-fun mvvmActivityXml(
+fun mvvmFragmentXml(
     packageName: String,
     activityClass: String
 ) = """
@@ -19,16 +19,6 @@ fun mvvmActivityXml(
         android:layout_height="match_parent"
         android:background="@color/color_bg_main"
         android:orientation="vertical">
-    
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tool"
-            style="@style/MyTool">
-    
-            <TextView
-                style="@style/ToolTitle"
-                android:text="" />
-    
-        </androidx.appcompat.widget.Toolbar>
     
         <FrameLayout
             android:id="@+id/msv"

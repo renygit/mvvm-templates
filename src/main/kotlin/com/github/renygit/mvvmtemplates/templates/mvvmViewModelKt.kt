@@ -9,7 +9,7 @@ fun mvvmViewModelKt(
     packageName:String,
     activityClass:String
 )="""
-package ${packageName}.ui
+package ${packageName}.${activityClass.toLowerCase()}
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,12 +20,20 @@ import com.reny.ll.git.base_logic.api.exceptionProcess
 
 class ${activityClass}ViewModel(val repo: ${activityClass}Repository) : MViewModel() {
 
-    val result: MutableLiveData<Any> = MutableLiveData()
+    private var page = 1
 
-    fun doSomething(){
-        showLoading()
+    val liveResult: MutableLiveData<List<Any>> = MutableLiveData()
+
+    override fun loadData(refresh: Boolean) {
+        super.loadData(refresh)
         launch(exceptionProcess()) {
+            var p = if (refresh) 1 else page
+            //val result = repo.api.getData(p).process()
+            page = ++p
 
+            val noMore = result?.size ?: 0 < pageSize
+            setLoadState(if(isEmpty(result)) STATE_EMPTY else STATE_CONTENT, noMore, refresh)
+            liveResult.postValue(result)
         }
     }
 

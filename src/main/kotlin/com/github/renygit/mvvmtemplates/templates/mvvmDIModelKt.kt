@@ -9,7 +9,7 @@ fun mvvmDIModelKt(
     packageName:String,
     activityClass:String
 )="""
-package ${packageName}.ui
+package ${packageName}.${activityClass.toLowerCase()}
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider

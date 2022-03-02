@@ -11,7 +11,7 @@ fun mvvmActivityKt(
     layoutName:String,
     packageName:String
 )="""
-package ${packageName}.ui
+package ${packageName}.${activityClass.toLowerCase()}
 
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.reny.ll.git.base_logic.MActivity
@@ -24,7 +24,7 @@ import org.kodein.di.instance
 
 
 @Route(path = "")
-class ${activityClass}Activity : MActivity() {
+class ${activityClass}Activity : MActivity<Activity${activityClass}Binding>() {
 
     override val di by subDI(closestDI()) {
         import(${activityClass}DIModule)
@@ -40,13 +40,13 @@ class ${activityClass}Activity : MActivity() {
 
     override fun initView() {
         layoutManager = VirtualLayoutManager(this)
-        rv.layoutManager = layoutManager
+        binding.rv.layoutManager = layoutManager
         mAdapter = DelegateAdapter(layoutManager, true)
 
         viewPool = RecyclerView.RecycledViewPool()
-        rv.setRecycledViewPool(viewPool)
+        binding.rv.setRecycledViewPool(viewPool)
 
-        rv.adapter = mAdapter
+        binding.rv.adapter = mAdapter
     }
 }
 """
